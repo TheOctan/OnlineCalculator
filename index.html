@@ -14,11 +14,13 @@
 
 	<div class="calculator">
 		<div class="header">
-			<input type="text" placeholder="0,00" class="account" readonly>
-			<input type="text" placeholder="0,00" class="result" readonly>
+			<form name="form1">
+				<input type="text" placeholder="0,00" name="textview1" class="account" readonly>
+				<input type="text" placeholder="0,00" name="textview2" class="result" readonly>
+			</form>
 		</div>
 		<div class="main">
-			<button onclick="input('%')" class="btn">%</button">
+			<button onclick="input('%')" class="btn">%</button>
 			<button onclick="input('C')" class="btn">C</button>
 			<button onclick="input('')" class="btn"><i class="fas fa-backspace"></i></button>
 			<button onclick="input('')" class="btn btn-indigo">/</button>
@@ -36,7 +38,7 @@
 			<button onclick="input('+')" class="btn btn-indigo">+</button>
 			<button onclick="input('0')" class="btn">0</button>
 			<button onclick="input('.')" class="btn">,</button>
-			<button onclick="input('')" class="btn-big">=</button>
+			<button onclick="result()" class="btn-big">=</button>
 		</div>
 	</div>
 
