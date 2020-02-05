@@ -6,18 +6,54 @@
 /* eslint-disable space-before-function-paren */
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-// document.write('Hello World')
 
-function input(i) {
-    const inputCalc = document.querySelector('.account');
+const empty = '0,00';
 
-    inputCalc.value += i;
+function getHistory() {
+    return document.querySelector('.history');
+}
+
+function setHistory(num) {
+    getHistory().value = num;
+}
+
+function getOutput() {
+    return document.querySelector('.output');
+}
+
+function setOutput(num) {
+    if (num === "") {
+        getOutput().value = num;
+    } else {
+        getOutput().value = getFormattedNumber(num);
+    }
+}
+
+function getFormattedNumber(num) {
+    var n = Number(num);
+    var value = n.toLocaleString("en");
+    return value;
+}
+
+function reverseNumberFormat(num) {
+    return Number(num.replace(/,/g, ''));
+}
+
+function reset() {
+
+}
+
+function operator(id) {
+    alert(id);
+}
+
+function number(num) {
+    alert(num);
 }
 
 function result() {
-    const inputCalc = document.querySelector('.account');
-    const resultCalc = document.querySelector('.result');
+}
 
-    resultCalc.value = eval(inputCalc.value);
-    inputCalc.value = eval(inputCalc.value);
+function backspace() {
+
 }

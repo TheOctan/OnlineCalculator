@@ -31,7 +31,7 @@ body {
     text-align: right;
 }
 
-.account {
+.history {
     width: 100%;
     background: transparent;
     border: none;
@@ -41,11 +41,11 @@ body {
     text-align: right;
 }
 
-.account::placeholder {
+.history::placeholder {
     color: #d98192;
 }
 
-.result {
+.output {
     width: 100%;
     margin-top: 18px;
     text-align: right;
@@ -56,7 +56,7 @@ body {
     color: #fff;
 }
 
-.result::placeholder {
+.output::placeholder {
     color: #fff;
 }
 
