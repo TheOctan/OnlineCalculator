@@ -31,6 +31,9 @@ function setOutput(num) {
 }
 
 function getFormattedNumber(num) {
+    if (num === "-") {
+        return "";
+    }
     var n = Number(num);
     var value = n.toLocaleString("en");
     return value;
@@ -49,8 +52,14 @@ function operator(id) {
     var output = getOutput().value;
     var history = getHistory().value;
 
-    if (output !== "") {
-        output = reverseNumberFormat(output);
+    if (output === "" && history !== "") {
+        if (isNaN(history[history.length - 1])) {
+            history = history.substr(0, history.length - 1);
+        }
+    }
+
+    if (output !== "" || history !== "") {
+        output = (output === "") ? output : reverseNumberFormat(output);
         history += output;
 
         if (id === '=') {
@@ -71,9 +80,6 @@ function number(num) {
         output += num;
         setOutput(output);
     }
-}
-
-function result() {
 }
 
 function backspace() {
