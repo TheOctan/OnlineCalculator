@@ -52,7 +52,7 @@ function reset() {
 function appendNumber(expression, id) {
     if (id === '.' && expression.includes('.')) return expression;
     if (id === '.' && expression.length === 0) return expression + '0' + id;
-    // if (id === '0' && !expression.includes('.') && expression.length === 1) return expression;
+    if (id === '0' && !expression.includes('.')) return expression;
     return expression + id;
 }
 
