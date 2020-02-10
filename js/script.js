@@ -26,7 +26,8 @@ function setOutput(num) {
     if (num === "") {
         getOutput().value = num;
     } else {
-        getOutput().value = getFormattedNumber(num);
+        // getOutput().value = getFormattedNumber(num);
+        getOutput().value = num;
     }
 }
 
@@ -48,6 +49,13 @@ function reset() {
     setOutput("");
 }
 
+function appendNumber(expression, id) {
+    if (id === '.' && expression.includes('.')) return expression;
+    if (id === '.' && expression.length === 0) return expression + '0' + id;
+    // if (id === '0' && !expression.includes('.') && expression.length === 1) return expression;
+    return expression + id;
+}
+
 function operator(id) {
     var output = getOutput().value;
     var history = getHistory().value;
@@ -59,7 +67,7 @@ function operator(id) {
     }
 
     if (output !== "" || history !== "") {
-        output = (output === "") ? output : reverseNumberFormat(output);
+        // output = (output === "") ? output : reverseNumberFormat(output);
         history += output;
 
         if (id === '=') {
@@ -75,15 +83,18 @@ function operator(id) {
 }
 
 function number(num) {
-    var output = reverseNumberFormat(getOutput().value);
-    if (output !== NaN) {
-        output += num;
+    // var output = reverseNumberFormat(getOutput().value);
+    var output = getOutput().value;
+    if (output !== NaN && output.length < 6) {
+        // output += num;
+        output = appendNumber(output, num);
         setOutput(output);
     }
 }
 
 function backspace() {
-    var output = reverseNumberFormat(getOutput().value).toString();
+    // var output = reverseNumberFormat(getOutput().value).toString();
+    var output = getOutput().value;
     if (output) {
         output = output.substr(0, output.length - 1);
         setOutput(output);
