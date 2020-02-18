@@ -9,6 +9,8 @@
 /* eslint-disable no-unused-vars */
 
 // const empty = '0,00';
+var lastOperation = "";
+const incorrectOperation = "error";
 
 function getHistory() {
     return document.querySelector('.history');
@@ -52,13 +54,18 @@ function reset() {
 function appendNumber(expression, id) {
     if (id === '.' && expression.includes('.')) return expression;
     if (id === '.' && expression.length === 0) return expression + '0' + id;
-    if (id === '0' && !expression.includes('.')) return expression;
+    if (id === '0' && expression.includes('0') && expression.length === 1) return expression;
     return expression + id;
 }
 
 function operator(id) {
     var output = getOutput().value;
     var history = getHistory().value;
+
+    if (output === incorrectOperation) {
+        reset();
+        output = "";
+    }
 
     if (output === "" && history !== "") {
         if (isNaN(history[history.length - 1])) {
@@ -72,7 +79,12 @@ function operator(id) {
 
         if (id === '=') {
             var result = eval(history);
-            setOutput(result);
+
+            if (!isNaN(result)) {
+                setOutput(result);
+            } else {
+                setOutput(incorrectOperation);
+            }
             setHistory("");
         } else {
             history += id;
@@ -85,6 +97,12 @@ function operator(id) {
 function number(num) {
     // var output = reverseNumberFormat(getOutput().value);
     var output = getOutput().value;
+
+    if (output === incorrectOperation) {
+        reset();
+        output = "";
+    }
+
     if (output !== NaN && output.length < 6) {
         // output += num;
         output = appendNumber(output, num);
@@ -95,7 +113,9 @@ function number(num) {
 function backspace() {
     // var output = reverseNumberFormat(getOutput().value).toString();
     var output = getOutput().value;
-    if (output) {
+    if (output === "Infinity" || output === "-Infinity" || output === incorrectOperation) {
+        setOutput("");
+    } else if (output) {
         output = output.substr(0, output.length - 1);
         setOutput(output);
     }
